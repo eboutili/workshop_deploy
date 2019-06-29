@@ -1,13 +1,15 @@
 #!/bin/bash
 echo "Info: Checking if all prereqs for AWSKit have been met..."
 
-echo "Info: Checking if XCode Commandline Developer Tools are installed..."
-xcode-select -p
-if [ $? -eq 0 ]; then
-  echo "Info: XCode Commandline Developer Tools are installed, continuing..."
-else
-  echo "Error: XCode Tools are NOT installed! Run 'xcode-select --install' first."
-  exit 1
+if [ "$(uname)" == "Darwin" ]; then
+  echo "Info: Checking if XCode Commandline Developer Tools are installed..."
+  xcode-select -p
+  if [ $? -eq 0 ]; then
+    echo "Info: XCode Commandline Developer Tools are installed, continuing..."
+  else
+    echo "Error: XCode Tools are NOT installed! Run 'xcode-select --install' first."
+    exit 1
+  fi
 fi
 
 echo "Info: Checking if AWSCLI is installed..."
